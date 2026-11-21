@@ -22,6 +22,12 @@ look, price and reason. It cannot place, change or cancel an order.
 All prices are dollars per contract between 0 and 1. Passing `52` for 52 cents is
 rejected by input validation rather than silently producing a wrong fee.
 
+## In use
+
+Claude Code answering a fee question with the server connected (four tool calls: series fees, markets, orderbook, fee):
+
+![Claude Code session using the tools](assets/claude_session.png)
+
 ## Why these tools
 
 Fees decide most prediction-market questions, and a language model will happily
