@@ -1,0 +1,103 @@
+Tools: kalshi_fee, two_leg_position, price_two_leg, kalshi_series_fees, kalshi_markets, kalshi_orderbook
+
+> kalshi_series_fees(KXHIGHLAX)
+  {
+    "ticker": "KXHIGHLAX",
+    "title": "Highest temperature in Los Angeles",
+    "category": "Climate and Weather",
+    "frequency": "daily",
+    "fee_type": "quadratic",
+    "fee_multiplier": 1.0,
+    "charges_maker_fee": false
+  }
+
+> kalshi_markets(KXHIGHLAX, limit=1)
+  {
+    "series_ticker": "KXHIGHLAX",
+    "count": 1,
+    "truncated": true,
+    "markets": [
+      {
+        "ticker": "KXHIGHLAX-26NOV22-T72",
+        "title": "Will the maximum temperature be >72\u00b0 on Nov 22, 2026?",
+        "yes_means": "73\u00b0 or above",
+        "status": "active",
+        "close_time": "2026-11-23T09:00:00Z",
+        "yes_bid": 0.01,
+        "yes_ask": 0.02,
+        "no_bid": 0.98,
+        "no_ask": 0.99,
+        "yes_bid_size": 132.0,
+        "yes_ask_size": 1390.06,
+        "last_price": 0.02,
+        "volume_24h": 208.0,
+        "open_interest": 208.0
+      }
+    ]
+  }
+
+> kalshi_orderbook(KXHIGHLAX-26NOV22-T72, depth=2)
+  {
+    "ticker": "KXHIGHLAX-26NOV22-T72",
+    "yes_bids": [
+      {
+        "price": 0.01,
+        "size": 132.0
+      }
+    ],
+    "no_bids": [
+      {
+        "price": 0.98,
+        "size": 1390.06
+      },
+      {
+        "price": 0.97,
+        "size": 71.01
+      }
+    ],
+    "best_yes_bid": 0.01,
+    "best_no_bid": 0.98,
+    "implied_yes_ask": 0.02,
+    "implied_no_ask": 0.99,
+    "empty": false
+  }
+
+> kalshi_fee(100 contracts at the live ask 0.02)
+  {
+    "fee_usd": 0.14,
+    "fee_cents_per_contract": 0.14,
+    "fee_pct_of_payout": 0.14,
+    "min_edge_cents_to_break_even_held_to_settlement": 0.14,
+    "inputs": {
+      "contracts": 100,
+      "price": 0.02,
+      "multiplier": 1.0,
+      "maker": false,
+      "fee_type": "quadratic"
+    }
+  }
+
+> two_leg_position(100 YES at 0.42, 40 NO at 0.50, target 2c)
+  {
+    "yes": {
+      "qty": 100.0,
+      "avg_cost": 0.42
+    },
+    "no": {
+      "qty": 40.0,
+      "avg_cost": 0.5
+    },
+    "total_cost_usd": 62.0,
+    "pnl_if_yes_usd": 38.0,
+    "pnl_if_no_usd": -22.0,
+    "locked_pnl_usd": -22.0,
+    "is_locked": false,
+    "unhedged_qty": 60.0,
+    "unhedged_side": "YES",
+    "side_to_buy": "NO",
+    "max_price_to_finish_hedge": 0.6,
+    "hedge_possible_at_target": true
+  }
+
+> kalshi_series_fees(ZZZNOTASERIES)  <- an error the agent can read
+  ERROR: Error executing tool kalshi_series_fees: not found: /series/ZZZNOTASERIES
