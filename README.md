@@ -83,3 +83,7 @@ Claude Desktop (`claude_desktop_config.json`):
 The offline suite starts the real server as a subprocess and talks to it over
 stdio with an MCP client, so the tool schemas and results are tested as an agent
 would see them.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
